@@ -5,9 +5,27 @@
 
 The app is using monaco editor and oceanic theme.
 
-Compilation is done using Judge() in RapidAPI.
+Above the editor we have 1 selector component haveing different programming languages to choose from. There are also three 
+button components to left of selector. 
 
-It has 4 button components (save, copy, lock, compile), one select element for selecting language, and notifications are created using toastify.
+Lock button can toggle the editor between readonly and read/write (image also changes).
+
+Save button downloads the file in user's device (default file type is text but language extensions can be added by the user when saving the file). 
+
+Copy button copies the code from the editor and gives a sucess notification at top right. On failure of copying the code it gives error notification (using toast) on top right.
+
+At right bottom we have compile button which sends the code to Judge() along with the language and custom input.
+Compilation is done using Judge() in RapidAPI. It polls the api and on successful response gives success notification at top right, error notification is given on failed response. 
+
+Above the compilation button we have custom input component which takes input from user and gives to Judge() for compilation. 
+
+
+Above it is Output component which shows the Std output on sucessful compilation of code. On receving other status code other data is shown. Types of staus code can be seen below in the statuses obj. 
+
+Compilation time and memory along with the type of status is shown  at bottom right after the successful response from api.
+
+
+
 
 # React + Vite
 

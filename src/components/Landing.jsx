@@ -10,6 +10,9 @@ import OutputWindow from "./OutputWindow";
 import CustomInput from "./CustomInput";
 import OutputDetails from "./OutputDetails";
 import LanguagesDropdown from "./LanguagesDropdown";
+import ReadButton from "./ReadButton";
+import SaveButton from "./SaveButton";
+import CopyButton from "./CopyButton";
 
 const javascriptDefault = `//some comment`;
 
@@ -20,6 +23,7 @@ const Landing = () => {
   const [processing, setProcessing] = useState(null);
   const [theme, setTheme] = useState("cobalt");
   const [language, setLanguage] = useState(languageOptions[0]);
+  const [read, setRead] = useState(false)
 
   const onSelectChange = (s1) => {
     console.log("selected option ... ", s1);
@@ -48,13 +52,13 @@ const Landing = () => {
     };
     const options = {
       method: "POST",
-      url: process.env.REACT_APP_RAPID_API_URL,
+      url: import.meta.env.VITE_RAPID_API_URL,
       params: { base64_encoded: "true", fields: "*" },
       headers: {
         "content-type": "application/json",
         "Content-Type": "application/json",
-        "X-RapidAPI-Host": process.env.REACT_APP_RAPID_API_HOST,
-        "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+        "X-RapidAPI-Host": import.meta.env.VITE_RAPID_API_HOST,
+        "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
       },
       data: formData,
     };
@@ -77,11 +81,11 @@ const Landing = () => {
   const checkStatus = async (token) => {
     const options = {
       method: "GET",
-      url: process.env.REACT_APP_RAPID_API_URL + "/" + token,
+      url: import.meta.env.VITE_RAPID_API_URL + "/" + token,
       params: { base64_encoded: "true", fields: "*" },
       headers: {
-        "X-RapidAPI-Host": process.env.REACT_APP_RAPID_API_HOST,
-        "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+        "X-RapidAPI-Host": import.meta.env.VITE_RAPID_API_HOST,
+        "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
       },
     };
     try {
@@ -120,33 +124,31 @@ const Landing = () => {
   const showSuccessToast = (msg) => {
     toast.success(msg || "Compiled Sucessfully!"),
       {
-        position: "bottom-right",
+        position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: 0.2,
       };
   };
 
   const showErrorToast = (msg) => {
     toast.success(msg || "Compiled Sucessfully!"),
       {
-        position: "bottom-right",
+        position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: 0.2,
       };
   };
 
   return (
     <>
       <ToastContainer
-        position="bottom-left"
+        position="top-right"
         autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -161,6 +163,16 @@ const Landing = () => {
         <div className="px-4 py-2">
           <LanguagesDropdown onSelectChange={onSelectChange} />
         </div>
+        <div className="px-4 py-2">
+          <ReadButton read={read} setRead={setRead}/>
+        </div>
+        <div className="px-4 py-2">
+          <SaveButton code={code} />
+        </div>
+        <div className="px-4 py-2">
+          <CopyButton code={code}/>
+        </div>
+
        
       </div>
       <div className="flex space-x-4 px-4 py-4">
@@ -170,6 +182,7 @@ const Landing = () => {
             onChange={onChange}
             language={language?.value}
             theme={theme.value}
+            read = {read}
           />
         </div>
 

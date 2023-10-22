@@ -3,8 +3,10 @@
 
 ## The number of requests to API is 50 per day.
 
-The app is using monaco editor and oceanic theme. 
+The app is using monaco editor and oceanic theme.
+
 Compilation is done using Judge() in RapidAPI.
+
 It has 4 button components (save, copy, lock, compile), one select element for selecting language, and notifications are created using toastify.
 
 # React + Vite

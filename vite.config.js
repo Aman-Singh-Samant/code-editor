@@ -4,5 +4,6 @@ export default {
   theme: {
     extend: {},
   },
+  base: "/code-editor",
   plugins: [],
 };

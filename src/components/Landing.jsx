@@ -158,35 +158,35 @@ const Landing = () => {
         draggable={true}
         pauseOnHover={true}
       />
-      <div className="h-4 w-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></div>
-      <div className="flex">
+      <div className="h-4 w-[100vw] bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></div>
+      <div className="flex max-sm:flex-col">
         <div className="px-4 py-2">
           <LanguagesDropdown onSelectChange={onSelectChange} />
         </div>
-        <div className="px-4 py-2">
-          <ReadButton read={read} setRead={setRead}/>
+        <div className="flex">
+          <div className="px-4 py-2">
+            <ReadButton read={read} setRead={setRead} />
+          </div>
+          <div className="px-4 py-2">
+            <SaveButton code={code} />
+          </div>
+          <div className="px-4 py-2">
+            <CopyButton code={code} />
+          </div>
         </div>
-        <div className="px-4 py-2">
-          <SaveButton code={code} />
-        </div>
-        <div className="px-4 py-2">
-          <CopyButton code={code}/>
-        </div>
-
-       
       </div>
-      <div className="flex space-x-4 px-4 py-4">
+      <div className="flex space-x-4 px-4 py-4 max-sm:flex-col">
         <div className="flex flex-col w-full h-full justify-start items-end">
           <CodeEditor
             code={code}
             onChange={onChange}
             language={language?.value}
             theme={theme.value}
-            read = {read}
+            read={read}
           />
         </div>
 
-        <div className="right-container flex flex-col flex-shrink-0 w-[30%]">
+        <div className="right-container flex flex-col flex-shrink-0 w-[30%] max-sm:w-[80%]">
           <OutputWindow outputDetails={outputDetails} />
           <div className="flex flex-col items-end">
             <CustomInput
@@ -196,10 +196,8 @@ const Landing = () => {
             <button
               onClick={handleCompile}
               disabled={!code}
-              className={
-                `mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0
-                ${!code ? "opacity-50" : ""}`
-            }
+              className={`mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0
+                ${!code ? "opacity-50" : ""}`}
             >
               {processing ? "Processing..." : "Compile and Execute"}
             </button>

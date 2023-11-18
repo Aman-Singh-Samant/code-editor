@@ -1,0 +1,3 @@
+//some comment
+console.log('hello world')//some comment
+console.log('hello world')
